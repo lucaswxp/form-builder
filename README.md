@@ -14,7 +14,7 @@ var Form = require('form-builder');
 // creates my form with some data for the inputs
 var myForm = new Form({action: '/signup', class: 'myform-class'}, {user: {firstName: 'Lucas', lastName: 'Pelegrino', email: 'my@email.com'}});
 
-// display the form opening tag
+// opens the form (it DOENS'T render the whole form, only the beginning tag)
 myForm.render(); // will return: <form action="/signup" class="myform-class">
 
 // add the first field and renders it
@@ -25,6 +25,9 @@ myForm.text().attr('name', 'user[lastName]').render(); // will return: <input ty
 
 // add the email field and renders it
 myForm.email().attr('name', 'user[email]').render(); // will return: <input type="email" name="user[email]" value="my@email.com" />
+
+// closes form
+myForm.end(); // returns </form>
 ```
 
 Constructing forms
@@ -36,7 +39,7 @@ By default, the `{formData}` will overwrite any inline specific value you set to
 Form without data:
 
 ```javascript
-var Form = require('form-builder');
+var Form = require('form-builder').Form;
 
 // creates the form with no data
 var myForm = new Form({action: '/signup'});
@@ -55,7 +58,7 @@ Every input has a .setDefault() method.
 Now we can populate our form with non default values, overwriting the ones we have created before:
 
 ```javascript
-var Form = require('form-builder');
+var Form = require('form-builder').Form;
 
 // creates the form with some data
 var myForm = new Form({action: '/signup'}, {
@@ -78,7 +81,7 @@ The library also provide functionality to easily manage some of the most complex
 See:
 
 ```javascript
-var Form = require('form-builder');
+var Form = require('form-builder').Form;
 
 // creates the form
 var myForm = new Form({action: '/signup'}, {
