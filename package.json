@@ -1,0 +1,31 @@
+{
+  "name": "form-builder",
+  "version": "0.0.1",
+  "description": "A node js library for building forms and form elements",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "vows": "^0.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucaswxp/form-builder.git"
+  },
+  "keywords": [
+    "form",
+    "element",
+    "inputs"
+  ],
+  "author": "= <=>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucaswxp/form-builder/issues"
+  },
+  "homepage": "https://github.com/lucaswxp/form-builder"
+}
