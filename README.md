@@ -12,7 +12,9 @@ Basically you create a Form object and starting adding fields to it, see a simpl
 var Form = require('form-builder');
 
 // creates my form with some data for the inputs
-var myForm = new Form({action: '/signup', class: 'myform-class'}, {user: {firstName: 'Lucas', lastName: 'Pelegrino', email: 'my@email.com'}});
+var myForm = new Form({action: '/signup', class: 'myform-class'}, {
+    user: {firstName: 'Lucas', lastName: 'Pelegrino', email: 'my@email.com'}
+});
 
 // opens the form (it DOENS'T render the whole form, only the beginning tag)
 myForm.render(); // will return: <form action="/signup" class="myform-class">
