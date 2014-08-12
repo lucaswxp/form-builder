@@ -93,7 +93,7 @@ var myForm = new Form({action: '/signup'}, {
 });
 
 // a select tag
-form.select()
+myForm.select()
     .attr({name: 'country[]', multiple: true})
     .setOptions({br: 'Brazil', at: 'Austria', de: 'Germany'})
     .setEmpty('- select a country -')
@@ -111,19 +111,19 @@ will return:
 
 
 // a group of checkboxes, the formBuilder automatically transform "checklist[]" into "checklist[INDEX]", you  can use your own INDEX without problem, see example bellow
-form.checkbox().attr({name: 'checklist[]'}).render(); // <input type="checkbox" value="1" name="checklist[0]" checked="checked" />
+myForm.checkbox().attr({name: 'checklist[]'}).render(); // <input type="checkbox" value="1" name="checklist[0]" checked="checked" />
 
-form.checkbox().attr({name: 'checklist[]'}).render(); // <input type="checkbox" value="1" name="checklist[1]" />
+myForm.checkbox().attr({name: 'checklist[]'}).render(); // <input type="checkbox" value="1" name="checklist[1]" />
 
-form.checkbox().attr({name: 'checklist[]'}).render(); // <input type="checkbox" value="1" name="checklist[2]" checked="checked" />
+myForm.checkbox().attr({name: 'checklist[]'}).render(); // <input type="checkbox" value="1" name="checklist[2]" checked="checked" />
 
 
 // another group of checkboxes, using indexes
-form.checkbox().attr({name: 'favoriteBands[metallica]'}).render(); // <input type="checkbox" value="1" name="favoriteBands[metallica]" checked="checked" />
+myForm.checkbox().attr({name: 'favoriteBands[metallica]'}).render(); // <input type="checkbox" value="1" name="favoriteBands[metallica]" checked="checked" />
 
-form.checkbox().attr({name: 'favoriteBands[soad]'}).render(); // <input type="checkbox" value="1" name="favoriteBands[soad]" />
+myForm.checkbox().attr({name: 'favoriteBands[soad]'}).render(); // <input type="checkbox" value="1" name="favoriteBands[soad]" />
 
-form.checkbox().attr({name: 'favoriteBands[snakepit]'}).render(); // <input type="checkbox" value="1" name="favoriteBands[snakepit]" checked="checked" />
+myForm.checkbox().attr({name: 'favoriteBands[snakepit]'}).render(); // <input type="checkbox" value="1" name="favoriteBands[snakepit]" checked="checked" />
 ```
 
 The default behavior with form-builder regarding checkboxes is AWALYS set the value attribute to 1/true and let the index of the name tell which option is which, as seen on the examples above.
