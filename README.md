@@ -9,7 +9,7 @@ How it works
 Basically you create a Form object and starting adding fields to it, see a simple example:
 
 ```javascript
-var Form = require('form-builder');
+var Form = require('form-builder').Form;
 
 // creates my form with some data for the inputs
 var myForm = new Form({action: '/signup', class: 'myform-class'}, {
