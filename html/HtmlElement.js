@@ -146,6 +146,6 @@ HtmlElement.prototype._parseAttributes = function() {
 }
     
 HtmlElement.unclosableElements = ['input', 'img', 'hr', 'br'];
-HtmlElement.boolAttrs = ['checked', 'selected', 'multiple'];
+HtmlElement.boolAttrs = ['checked', 'selected', 'multiple', 'disabled', 'readonly', 'required', 'autofocus'];
 
 module.exports = HtmlElement;

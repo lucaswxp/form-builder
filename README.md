@@ -3,10 +3,10 @@ form-builder
 
 A node js library for building forms and form elements
 
-How it works
+Basics
 ============
 
-Basically you create a Form object and starting adding fields to it, see a simple example:
+Basically you create a Form object and start adding fields to it, see a simple example:
 
 ```javascript
 var Form = require('form-builder').Form;
@@ -30,6 +30,45 @@ myForm.email().attr('name', 'user[email]').render(); // will return: <input type
 
 // closes form
 myForm.end(); // returns </form>
+```
+
+Mixing with HTML
+============
+
+The `myForm` object acts as a factory object for creating and configuring fields. The form and form elements itself have no restrictions on where to be rendered, you can
+just call '.render()' wherever you would like to display the html object as string. *Observation:* calling `myForm.render()` will not render the form + the form fields, it will only render the <form> start tag, if you
+desire to close the form, call `myForm.end()`. Also, calling `toString()` method is the same as caling `.render()`, that way you can easily mix HTML with the form, see a example using a EmbeddedJS template:
+
+```javascript
+<%
+var Form = require('form-builder').Form,
+    myForm = new Form({action: '/signup', class: 'myform-class'}, {
+        user: {username: 'dummyUser', password: 'mysecret', remember: true} // this will populate the form with some data
+    });
+%>
+    
+<h1>User login</h1>
+
+<!-- open form tag -->
+<%- myForm ->
+
+<label>
+    Username
+    <%- myForm.text().attr({name: 'user[username]', placeholder: 'Login', required: true}) %> <!-- output: <input type="text" name="user[username]" value="dummyUser" required="required" /> -->
+</label>
+
+<label>
+    Password
+    <%- myForm.password().attr({name: 'user[password]', placeholder: 'Password', required: true}) %> <!-- output: <input type="password" name="user[password]" value="dummyUser" required="required" /> -->
+</label>
+
+<label>
+    <%- myForm.checkbox().attr('name', 'user[remember]') %> <!-- output: <input type="checkbox" name="user[remember]" value="1" checked="checked" /> -->
+    Remember me
+</label>
+
+<!-- closes form tag -->
+<%- myForm.end() %>
 ```
 
 Constructing forms
