@@ -36,7 +36,9 @@ Mixing with HTML
 ============
 
 The `myForm` object acts as a factory object for creating and configuring fields. The form and form elements itself have no restrictions on where to be rendered, you can
-just call '.render()' wherever you would like to display the html object as string. *Observation:* calling `myForm.render()` will not render the form + the form fields, it will only render the <form> start tag, if you
+just call '.render()' wherever you would like to display the html object as string.
+
+*Observation:* calling `myForm.render()` will not render the form + the form fields, it will only render the <form> start tag, if you
 desire to close the form, call `myForm.end()`. Also, calling `toString()` method is the same as caling `.render()`, that way you can easily mix HTML with the form, see a example using a EmbeddedJS template:
 
 ```javascript
