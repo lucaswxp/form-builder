@@ -90,6 +90,10 @@ Form.prototype.end = function(){
     return this.formTag.renderEnd();
 }
 
+Form.create = function(attributes, formData){
+    return new Form(attributes, formData);
+}
+
 Form._dynamiclyCreateType = ['textarea', 'select', 'radio', 'checkbox', 'button', 'color', 'date', 'datetime', 'datetimeLocal', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'range', 'reset', 'search', 'submit', 'tel', 'text', 'time', 'url', 'week'];;
 
 

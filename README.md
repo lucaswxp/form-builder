@@ -12,7 +12,7 @@ Basically you create a Form object and start adding fields to it, see a simple e
 var Form = require('form-builder').Form;
 
 // creates my form with some data for the inputs
-var myForm = new Form({action: '/signup', class: 'myform-class'}, {
+var myForm = Form.create({action: '/signup', class: 'myform-class'}, {
     user: {firstName: 'Lucas', lastName: 'Pelegrino', email: 'my@email.com'}
 });
 
@@ -44,7 +44,7 @@ desire to close the form, call `myForm.end()`. Also, calling `toString()` method
 ```javascript
 <%
 var Form = require('form-builder').Form,
-    myForm = new Form({action: '/signup', class: 'myform-class'}, {
+    myForm = Form.create({action: '/signup', class: 'myform-class'}, {
         user: {username: 'dummyUser', password: 'mysecret', remember: true} // this will populate the form with some data
     });
 %>
@@ -75,7 +75,7 @@ var Form = require('form-builder').Form,
 
 Constructing forms
 ============
-`new Form(attributes, formData)`
+`Form.create(attributes, formData)`
 
 By default, the `{formData}` will overwrite any inline specific value you set to the input. This is great for settings default values and then overwriting them if necessary:
 
@@ -85,7 +85,7 @@ Form without data:
 var Form = require('form-builder').Form;
 
 // creates the form with no data
-var myForm = new Form({action: '/signup'});
+var myForm = Form.create({action: '/signup'});
 
 
 myForm.text().attr('name', 'username').setDefault('myuser name').render(); // <input type="text" name="username" value="myuser name" />
@@ -104,7 +104,7 @@ Now we can populate our form with non default values, overwriting the ones we ha
 var Form = require('form-builder').Form;
 
 // creates the form with some data
-var myForm = new Form({action: '/signup'}, {
+var myForm = Form.create({action: '/signup'}, {
     username: 'coolName',
     newsletter: 'yes_once_per_month'
 });
@@ -126,7 +126,7 @@ For instance, if you wish to add a class to all fields of type text in a form:
 var Form = require('form-builder').Form;
 
 // creates the form
-var myForm = new Form({action: '/signup'});
+var myForm = Form.create({action: '/signup'});
 
 myForm.on('beforeRenderInput', function(input){
     if(input.attr('type') == 'text') input.attr('class', 'text-field');
@@ -152,7 +152,7 @@ See:
 var Form = require('form-builder').Form;
 
 // creates the form
-var myForm = new Form({action: '/signup'}, {
+var myForm = Form.create({action: '/signup'}, {
     country: ['br', 'at'], // the options with 'br' and 'at' values will be checked
     checklist: [0, 2], // zero-based: the first and the third checkboxes are checked
     favoriteBands: ['metallica', 'snakepit']
