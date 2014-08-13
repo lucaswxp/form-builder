@@ -7,15 +7,22 @@ function BooleanEntry(form) {
 BooleanEntry.prototype = Object.create(InputEntry.prototype);
 
 BooleanEntry.prototype.setData = function(value){
-    
     if (typeof value == 'boolean') {
         this.attr('checked', value);
     }else {
-        if (!(value instanceof Array)){
+        if (typeof value == 'string' || typeof value == 'number') {
             value = [value];
         }
-        var values = value.map(String); // everything to string
-        this.attr('checked', values.indexOf(this.getBooleanValue()) !== -1);
+        
+        if (value instanceof Array){
+            value = value.map(String);// everything to string
+            
+            this.attr('checked', value.indexOf(this.getBooleanValue()) !== -1);
+        }else if (value instanceof Object) {
+            this.attr('checked', value[this.getBooleanValue()] == true);
+        }else{
+            throw new Error('Impossible to fill value with: ' + value);
+        }
     }
 
     return this;

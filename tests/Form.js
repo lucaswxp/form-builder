@@ -59,8 +59,8 @@ vows.describe('test form')
                     bio: 'Say my name',
                     favoriteBand: 'Metallica',
                     todo: ['cleanHouse'],
-                    list: [0, 2],
-                    country: ['br', 'at']
+                    list: {0: true, 2: true}, // or just [0, 2]
+                    country: {'br': true, 'at': true}
                 });
                 form.on('beforeRenderInput', function(input){
                     input.attr('class', (input.attr('class') ? input.attr('class') + ' ' : '') + 'input-field');    

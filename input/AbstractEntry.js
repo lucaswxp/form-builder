@@ -47,7 +47,7 @@ Entry.prototype.fill = function(){
         
     if (formData !== undefined) {
         this.setData(formData);
-    }else{
+    }else if(defaultValue !== undefined){
         this.setData(defaultValue);
     }
 }

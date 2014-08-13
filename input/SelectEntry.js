@@ -16,14 +16,21 @@ function Select(form) {
 Select.prototype = Object.create(AbstractEntry.prototype);
 
 Select.prototype.setData = function(values){
-    if (!(values instanceof Array)) {
+    if (typeof values == 'string' || typeof values == 'number') {
         values = [values];
     }
-    
     for (var i in this.optionsHtml) {
-        values = values.map(String); // everything to string
+        var option = this.optionsHtml[i];
         
-        this.optionsHtml[i].attr('selected', values.indexOf(this.optionsHtml[i].attr('value')) !== -1);
+        if (values instanceof Array){
+            values = values.map(String);// everything to string
+            
+            this.optionsHtml[i].attr('selected', values.indexOf(option.attr('value')) !== -1);
+        }else if (values instanceof Object) {
+            this.optionsHtml[i].attr('selected', values[option.attr('value')] == true);
+        }else{
+            throw new Error('Impossible to fill value with: ' + values);
+        }
     }
     
     return this;
