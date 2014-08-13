@@ -116,6 +116,31 @@ myForm.radio().attr({name: 'newsletter', value: 'yes_once_per_month'}).render();
 myForm.radio().attr({name: 'newsletter', value: 'never'}).render(); // <input type="radio" name="newsletter" value="never" />
 ```
 
+Events
+============
+Before any input is rendered, the `Form` object will emit a `beforeRenderInput` event passing the input as parameter. That way you can easily configure some attributes in the scope of the form.
+
+For instance, if you wish to add a class to all fields of type text in a form:
+
+```javascript
+var Form = require('form-builder').Form;
+
+// creates the form
+var myForm = new Form({action: '/signup'});
+
+myForm.on('beforeRenderInput', function(input){
+    if(input.attr('type') == 'text') input.attr('class', 'text-field');
+})
+
+myForm.text().attr('name', 'username').setDefault('myuser name').render(); // <input type="text" name="username" value="myuser name" class="text-field" />
+
+myForm.radio().attr({name: 'newsletter', value: 'yes'}).render(); // <input type="radio" name="newsletter" value="yes" />
+
+myForm.radio().attr({name: 'newsletter', value: 'yes_once_per_month'}).render(); // <input type="radio" name="newsletter" value="yes_once_per_month" />
+
+myForm.radio().attr({name: 'newsletter', value: 'never'}).render(); // <input type="radio" name="newsletter" value="never" />
+```
+
 Input types
 ============
 form-builder provides support for several input types, you can create any html5 input using the type as a method of the form object (e.g: myForm.textarea()).
