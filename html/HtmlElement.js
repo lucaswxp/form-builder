@@ -131,9 +131,7 @@ HtmlElement.prototype.renderOpen = function(voidTag){
     return out;
 }
 
-
-
-HtmlElement.prototype.toString = HtmlElement.prototype.render;
+HtmlElement.prototype.toString = function(){ return this.render(); };
 
 HtmlElement.prototype._parseAttributes = function() {
     var out = '', name;
