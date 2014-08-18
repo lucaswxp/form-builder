@@ -61,7 +61,7 @@ Entry.prototype.fill = function(){
 Entry.prototype.getNormalizedNames = function(){
     var boundary = '--*boundary--';
     
-    return this.attr('name').replace('][', boundary).replace('[', boundary).replace(']', '').split(boundary);
+    return this.attr('name').replace(/]\[/g, boundary).replace(/\[/g, boundary).replace(/]/g, '').split(boundary);
 }
 
 module.exports = Entry;
