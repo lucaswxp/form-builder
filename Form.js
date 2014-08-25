@@ -47,7 +47,7 @@ Form.prototype.input = function(inputType){
         }
     }
     return input;
-}
+};
 
 Form.prototype.getValueFor = function(input){
     if (this.formData) {
@@ -72,36 +72,62 @@ Form.prototype.getValueFor = function(input){
         }
         return response;
     }
-}
+};
 
 Form.prototype.getFormData = function(){
     return this.formData;
-}
+};
 
 Form.prototype.setFormData = function(data){
     this.formData = data;
-}
+};
 
 Form.prototype.render = function(){
     return this.formTag.renderOpen();
-}
+};
 
 Form.prototype.end = function(){
     return this.formTag.renderEnd();
-}
+};
 
 Form.create = function(attributes, formData){
     return new Form(attributes, formData);
-}
+};
 
-Form._dynamiclyCreateType = ['textarea', 'select', 'radio', 'checkbox', 'button', 'color', 'date', 'datetime', 'datetimeLocal', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'range', 'reset', 'search', 'submit', 'tel', 'text', 'time', 'url', 'week'];;
+Form._dynamiclyCreateType = [
+    'textarea',
+    'select',
+    'radio',
+    'checkbox',
+    'button',
+    'color',
+    'date',
+    'datetime',
+    'datetimeLocal',
+    'email',
+    'file',
+    'hidden',
+    'image',
+    'month',
+    'number',
+    'password',
+    'range',
+    'reset',
+    'search',
+    'submit',
+    'tel',
+    'text',
+    'time',
+    'url',
+    'week'
+];
 
 
 for (var i in Form._dynamiclyCreateType) {
     (function(typeName){
         Form.prototype[typeName] = function(){
             return this.input(typeName);
-        }
+        };
     })(Form._dynamiclyCreateType[i]);
 }
 

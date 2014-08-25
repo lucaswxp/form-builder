@@ -10,4 +10,4 @@ module.exports = {
     checkbox: checkbox,
     select: select,
     textarea: textarea
-}
+};

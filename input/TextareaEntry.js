@@ -10,6 +10,6 @@ Textarea.prototype = Object.create(AbstractEntry.prototype);
 Textarea.prototype.setData = function(value){
     this.text(value);
     return this;
-}
+};
 
 module.exports = Textarea;

@@ -19,23 +19,23 @@ BooleanEntry.prototype.setData = function(value){
             
             this.attr('checked', value.indexOf(this.getBooleanValue()) !== -1);
         }else if (value instanceof Object) {
-            this.attr('checked', value[this.getBooleanValue()] == true);
+            this.attr('checked', value[this.getBooleanValue()] === true);
         }else{
             throw new Error('Impossible to fill value with: ' + value);
         }
     }
 
     return this;
-}
+};
 
 // set this checkbox as default checked
 BooleanEntry.prototype.setDefault = function(bool){
     this.defaultValue = (bool === undefined ? true : bool);
     return this;
-}
+};
 
 BooleanEntry.prototype.getBooleanValue = function(){
     return this.attr('value');
-}
+};
 
 module.exports = BooleanEntry;
