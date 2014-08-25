@@ -39,7 +39,7 @@ Entry.prototype.render = function(){
 };
 
 /**
- *Decides which value (the default, the user provided, etc) this entry will use when rendered
+ * Decides which value (the default, the user provided, etc) this entry will use when rendered
  */
 Entry.prototype.fill = function(){
     var formData = (this.form ? this.form.getValueFor(this) : undefined),
@@ -54,14 +54,17 @@ Entry.prototype.fill = function(){
 
 
 /**
- *Format a string like "user[name][surname]" into a array ['user', 'name', 'surname']
- *
- *@return {Array}
+ * Format a string like "user[name][surname]" into a array ['user', 'name', 'surname']
+ * @return {Array}
  */
 Entry.prototype.getNormalizedNames = function(){
     var boundary = '--*boundary--';
+
+    if(this.attr('name') !== undefined) {
+        return this.attr('name').replace(/]\[/g, boundary).replace(/\[/g, boundary).replace(/]/g, '').split(boundary);
+    }
     
-    return this.attr('name').replace(/]\[/g, boundary).replace(/\[/g, boundary).replace(/]/g, '').split(boundary);
+    
 };
 
 module.exports = Entry;

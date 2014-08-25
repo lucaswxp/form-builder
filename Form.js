@@ -68,7 +68,7 @@ Form.prototype.input = function(inputType){
 };
 
 Form.prototype.getValueFor = function(input){
-    if (this.formData) {
+    if (this.formData && input.attr('name') !== undefined) {
         var names = input.getNormalizedNames(),
             allData = this.getFormData(),
             currentName,
@@ -112,8 +112,8 @@ Form.prototype.end = function(){
  * Input wrapper (used on twitter Bootstrap)
  */
 Form.prototype.setInputWrapper = function(openTag,closeTag) {
-    
-    if(openTag !== "" || closeTag !== "") {
+
+    if(openTag !== "" && closeTag !== "") {
         this.inputWrapperTagOpen = openTag;
         this.inputWrapperTagClose = closeTag;
     }
@@ -140,7 +140,7 @@ Form.prototype.renderAll = function() {
         /**
          * Render the input wrapper if have
          */
-        if(this.inputWrapperTagOpen !== "" || this.inputWrapperTagClose !== "") {
+        if(this.inputWrapperTagOpen !== "" && this.inputWrapperTagClose !== "") {
             rendered += this.inputWrapperTagOpen;
             rendered += element.render();
             rendered += this.inputWrapperTagClose;
