@@ -23,6 +23,18 @@ Form.prototype = Object.create(HtmlElement.prototype);
 Form.prototype.constructor = Form;
 
 /**
+ * Keep inputs in arrays to render when call renderAll()
+ */
+Form.prototype.elements = [];
+
+/**
+ * Input wrapper tags
+ */
+Form.prototype.inputWrapperTagOpen = "";
+Form.prototype.inputWrapperTagClose = "";
+
+
+/**
  *Creates a input of type {inputType}
  *
  *@param {String} inputType
@@ -46,6 +58,12 @@ Form.prototype.input = function(inputType){
             input.attr('type', inputType);
         }
     }
+
+    /**
+     * Save the input on array
+     */
+    this.elements.push(input);
+
     return input;
 };
 
@@ -88,6 +106,57 @@ Form.prototype.render = function(){
 
 Form.prototype.end = function(){
     return this.formTag.renderEnd();
+};
+
+/**
+ * Input wrapper (used on twitter Bootstrap)
+ */
+Form.prototype.setInputWrapper = function(openTag,closeTag) {
+    
+    if(openTag !== "" || closeTag !== "") {
+        this.inputWrapperTagOpen = openTag;
+        this.inputWrapperTagClose = closeTag;
+    }
+};
+
+/**
+ * Render all elements
+ * @return string Rendered form
+ */
+Form.prototype.renderAll = function() {
+    var rendered = '';
+
+    /**
+     * Open form tag
+     */
+    rendered += this.render();
+
+    /**
+     * Render elements
+     */
+    for(var i in this.elements) {
+        var element = this.elements[i];
+
+        /**
+         * Render the input wrapper if have
+         */
+        if(this.inputWrapperTagOpen !== "" || this.inputWrapperTagClose !== "") {
+            rendered += this.inputWrapperTagOpen;
+            rendered += element.render();
+            rendered += this.inputWrapperTagClose;
+        }else {
+            rendered += element.render();
+        }
+        
+    }
+
+    /**
+     * Close form tag
+     */
+    rendered += this.end();
+
+    return rendered;
+    
 };
 
 Form.create = function(attributes, formData){
