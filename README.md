@@ -16,8 +16,8 @@ var myForm = Form.create({action: '/signup', class: 'myform-class'}, {
     user: {firstName: 'Lucas', lastName: 'Pelegrino', email: 'my@email.com'}
 });
 
-// opens the form (it DOENS'T render the whole form, only the beginning tag)
-myForm.render(); // will return: <form action="/signup" class="myform-class">
+// opens the form 
+myForm.open(); // will return: <form action="/signup" class="myform-class">
 
 // add the first field and renders it
 myForm.text().attr('name', 'user[firstName]').render(); // will return: <input type="text" name="user[firstName]" value="Lucas" />
@@ -38,8 +38,7 @@ Mixing with HTML
 The `myForm` object acts as a factory object for creating and configuring fields. The form and form elements itself have no restrictions on where to be rendered, you can
 just call '.render()' wherever you would like to display the html object as string.
 
-*Observation:* calling `myForm.render()` will not render the form + the form fields, it will only render the <form> start tag, if you
-desire to close the form, call `myForm.end()`. Also, calling `toString()` method is the same as caling `.render()`, that way you can easily mix HTML with the form, see a example using a EmbeddedJS template:
+*Observation:* Calling `toString()` method is the same as caling `.render()`
 
 ```javascript
 <%
@@ -52,7 +51,7 @@ var Form = require('form-builder').Form,
 <h1>User login</h1>
 
 <!-- open form tag -->
-<%- myForm ->
+<%- myForm.open() ->
 
 <label>
     Username
