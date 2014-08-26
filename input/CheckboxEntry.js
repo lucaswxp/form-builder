@@ -11,7 +11,8 @@ Checkbox.prototype = Object.create(BooleanEntry.prototype);
 
 Checkbox.prototype.getBooleanValue = function(){
     return this.getNormalizedNames().pop();
-}
+};
+
 Checkbox.prototype.render = function(){
     var names = this.getNormalizedNames(),
         haveIndex = names.length > 1,
@@ -32,10 +33,10 @@ Checkbox.prototype.render = function(){
         }
         
         var actualName = names.shift();
-        this.attr('name', actualName + '[' + names.join('][') +  ']')
+        this.attr('name', actualName + '[' + names.join('][') +  ']');
     }
     
     return BooleanEntry.prototype.render.call(this);
-}
+};
 
 module.exports = Checkbox;

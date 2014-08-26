@@ -12,22 +12,22 @@ Entry.prototype = Object.create(HtmlElement.prototype);
 Entry.prototype.setDefault = function(defaultValue){
     this.defaultValue = defaultValue;
     return this;
-}
+};
 
 Entry.prototype.getDefault = function(){
     return this.defaultValue;
-}
+};
 
 Entry.prototype.setData = function(val){
     throw new Error('You must subclass the getData() method');
-}
+};
 
 /**
  *Default before render callback
  */
 Entry.prototype.beforeRender = function(){
     this.fill();
-}
+};
 
 
 Entry.prototype.render = function(){
@@ -36,10 +36,10 @@ Entry.prototype.render = function(){
         this.form.emit('beforeRenderInput', this);
     }
     return HtmlElement.prototype.render.call(this);
-}
+};
 
 /**
- *Decides which value (the default, the user provided, etc) this entry will use when rendered
+ * Decides which value (the default, the user provided, etc) this entry will use when rendered
  */
 Entry.prototype.fill = function(){
     var formData = (this.form ? this.form.getValueFor(this) : undefined),
@@ -50,18 +50,21 @@ Entry.prototype.fill = function(){
     }else if(defaultValue !== undefined){
         this.setData(defaultValue);
     }
-}
+};
 
 
 /**
- *Format a string like "user[name][surname]" into a array ['user', 'name', 'surname']
- *
- *@return {Array}
+ * Format a string like "user[name][surname]" into a array ['user', 'name', 'surname']
+ * @return {Array}
  */
 Entry.prototype.getNormalizedNames = function(){
     var boundary = '--*boundary--';
+
+    if(this.attr('name') !== undefined) {
+        return this.attr('name').replace(/]\[/g, boundary).replace(/\[/g, boundary).replace(/]/g, '').split(boundary);
+    }
     
-    return this.attr('name').replace(/]\[/g, boundary).replace(/\[/g, boundary).replace(/]/g, '').split(boundary);
-}
+    
+};
 
 module.exports = Entry;

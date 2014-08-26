@@ -4,7 +4,7 @@ var AbstractEntry = require('../input/AbstractEntry'),
 function Select(form) {
     var options = {},
         optionsHtml = [],
-        emptyLabel = undefined;
+        emptyLabel = null;
     
     AbstractEntry.call(this, form);
     
@@ -27,14 +27,14 @@ Select.prototype.setData = function(values){
             
             this.optionsHtml[i].attr('selected', values.indexOf(option.attr('value')) !== -1);
         }else if (values instanceof Object) {
-            this.optionsHtml[i].attr('selected', values[option.attr('value')] == true);
+            this.optionsHtml[i].attr('selected', values[option.attr('value')] === true);
         }else{
             throw new Error('Impossible to fill value with: ' + values);
         }
     }
     
     return this;
-}
+};
 
 Select.prototype.setOptions = function(opts){
     this.options = opts;
@@ -44,7 +44,7 @@ Select.prototype.setOptions = function(opts){
     }
     
     return this;
-}
+};
 
 Select.prototype.beforeRender = function(){
     AbstractEntry.prototype.beforeRender.call(this);
@@ -63,7 +63,7 @@ Select.prototype.beforeRender = function(){
     }
     
     this.html("\n" + inner);
-}
+};
 
 
 Select.prototype.setEmpty = function(label, value){
@@ -73,10 +73,10 @@ Select.prototype.setEmpty = function(label, value){
         if (value === undefined) {
             value = '';
         }
-        this.empty = (new HtmlElement('option')).attr('value', value).text(label)
+        this.empty = (new HtmlElement('option')).attr('value', value).text(label);
     }
     
     return this;
-}
+};
 
 module.exports = Select;

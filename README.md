@@ -201,3 +201,5 @@ Roadmap
 * Better documentation
 * Better tests
 * Allow optgroups in selects
+* Values filters
+* Show errors
