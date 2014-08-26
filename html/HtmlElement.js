@@ -132,7 +132,6 @@ HtmlElement.prototype.renderOpen = function(voidTag){
 }
 
 HtmlElement.prototype.toString = function(){ return this.render(); };
-
 HtmlElement.prototype._parseAttributes = function() {
     var out = '', name;
     
@@ -141,6 +140,10 @@ HtmlElement.prototype._parseAttributes = function() {
     }
     
     return out;
+}
+
+HtmlElement.create = function(tag){
+    return new HtmlElement(tag);
 }
     
 HtmlElement.unclosableElements = ['input', 'img', 'hr', 'br'];

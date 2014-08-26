@@ -1,6 +1,8 @@
 var assert = require('assert'),
     vows = require('vows'),
-    Form = require('../index').Form;
+    Form = require('../index').Form,
+    tag = require('../index').HtmlElement;
+    
 
 vows.describe('test form')
     .addBatch({
@@ -13,7 +15,7 @@ vows.describe('test form')
                 return form;
             },
             'renders open tag correcly': function(form){
-                assert.equal('<form action="signup" class="form">', form.render());
+                assert.equal('<form action="signup" class="form">', form.open());
             },
             'renders end tag correcly': function(form){
                 assert.equal('</form>', form.end());
@@ -29,7 +31,7 @@ vows.describe('test form')
                 assert.equal('<input type="radio" name="favoriteBand" value="SOAD" checked="checked" class="input-field" />', form.radio().attr({name: 'favoriteBand', value: 'SOAD'}).setDefault().render());
             },
             'renders checkbox': function(form){
-                assert.equal('<input type="checkbox" value="1" name="todo[cleanHouse]" class="input-field" />', form.checkbox().attr({name: 'todo[cleanHouse]'}).render());
+                assert.equal('<div><input type="checkbox" value="1" name="todo[cleanHouse]" class="input-field" /></div>', form.checkbox().setWrapper(tag.create('div')).attr({name: 'todo[cleanHouse]'}).render());
                 assert.equal('<input type="checkbox" value="1" name="todo[goToWork]" checked="checked" class="input-field" />', form.checkbox().attr({name: 'todo[goToWork]'}).setDefault().render());
             },
             'renders indexed checkboxes': function(form){
@@ -68,7 +70,7 @@ vows.describe('test form')
                 return form;
             },
             'renders open tag correcly': function(form){
-                assert.equal('<form action="signup" class="form">', form.render());
+                assert.equal('<form action="signup" class="form">', form.open());
             },
             'renders end tag correcly': function(form){
                 assert.equal('</form>', form.end());
@@ -105,6 +107,19 @@ vows.describe('test form')
                                             .setDefault(['br', 'de'])
                                             .setEmpty('- select a country -')
                                             .render())
+            }
+        },
+        'wrapping form with a default input wrapper': {
+            topic: function(){
+                var form = new Form({action: 'signup', class: 'form'});
+                form.setInputWrapper(tag.create('div').attr('class', 'control'));
+                return form;
+            },
+            'renders text': function(form){
+                assert.equal('<div class="control"><input type="text" name="firstName" value="Lucas" /></div>', form.text().attr({name: 'firstName'}).setDefault('Lucas').render());
+            },
+            'renders textarea': function(form){
+                assert.equal('<div class="control"><textarea name="bio" class="textarea">Awesome</textarea></div>', form.textarea().attr({name: 'bio', class: 'textarea'}).setDefault('Awesome').render());
             }
         }
     }).run();

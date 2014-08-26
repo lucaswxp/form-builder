@@ -6,6 +6,13 @@ function Form(attributes, formData) {
     this.setTagName('form');
     this.formData = formData;
     this.formTag = new HtmlElement('form');
+    this.inputWrapper = null;
+        
+    /**
+     * Keep inputs in arrays
+     */ 
+    this.elements = [];
+    
     this._nameHolder = {};
     
     if (attributes !== undefined) {
@@ -21,18 +28,6 @@ function Form(attributes, formData) {
 
 Form.prototype = Object.create(HtmlElement.prototype);
 Form.prototype.constructor = Form;
-
-/**
- * Keep inputs in arrays to render when call renderAll()
- */
-Form.prototype.elements = [];
-
-/**
- * Input wrapper tags
- */
-Form.prototype.inputWrapperTagOpen = "";
-Form.prototype.inputWrapperTagClose = "";
-
 
 /**
  *Creates a input of type {inputType}
@@ -100,7 +95,7 @@ Form.prototype.setFormData = function(data){
     this.formData = data;
 };
 
-Form.prototype.render = function(){
+Form.prototype.open = function(){
     return this.formTag.renderOpen();
 };
 
@@ -109,45 +104,37 @@ Form.prototype.end = function(){
 };
 
 /**
- * Input wrapper (used on twitter Bootstrap)
+ * Input wrapper (frequently used on twitter Bootstrap and others as "form-control")
+ *
+ * <div class="form-control">
+ *    <input type="text" />
+ * </div>
  */
-Form.prototype.setInputWrapper = function(openTag,closeTag) {
-
-    if(openTag !== "" && closeTag !== "") {
-        this.inputWrapperTagOpen = openTag;
-        this.inputWrapperTagClose = closeTag;
+Form.prototype.setInputWrapper = function(inputWrapper) {
+    if (!(inputWrapper instanceof HtmlElement)) {
+        throw new Error('You must pass a instance of HtmlElement as wrapper');
     }
+    
+    this.inputWrapper = inputWrapper;
 };
 
 /**
  * Render all elements
  * @return string Rendered form
  */
-Form.prototype.renderAll = function() {
+Form.prototype.render = function() {
     var rendered = '';
 
     /**
      * Open form tag
      */
-    rendered += this.render();
+    rendered += this.open();
 
     /**
      * Render elements
      */
     for(var i in this.elements) {
-        var element = this.elements[i];
-
-        /**
-         * Render the input wrapper if have
-         */
-        if(this.inputWrapperTagOpen !== "" && this.inputWrapperTagClose !== "") {
-            rendered += this.inputWrapperTagOpen;
-            rendered += element.render();
-            rendered += this.inputWrapperTagClose;
-        }else {
-            rendered += element.render();
-        }
-        
+        rendered += this.elements[i].render();
     }
 
     /**

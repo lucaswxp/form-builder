@@ -4,6 +4,7 @@ function Entry(form) {
     HtmlElement.call(this);
     
     this.form = (form ? form : null);
+    this.inputWrapper = null;
 }
 
 Entry.prototype = Object.create(HtmlElement.prototype);
@@ -22,6 +23,30 @@ Entry.prototype.setData = function(val){
     throw new Error('You must subclass the getData() method');
 };
 
+Entry.prototype.setWrapper = function(inputWrapper){
+    if (!(inputWrapper instanceof HtmlElement)) {
+        throw new Error('You must pass a instance of HtmlElement as wrapper');
+    }
+    
+    this.inputWrapper = inputWrapper;
+    return this;
+};
+
+/**
+ *Gets global form wrapper or specific input wrapper.
+ */
+Entry.prototype.getWrapper = function(){
+    var wrapperTag;
+    
+    if (this.inputWrapper) {
+        wrapperTag = this.inputWrapper;
+    }else if (this.form && this.form.inputWrapper) {
+        wrapperTag = this.form.inputWrapper;
+    }
+    
+    return wrapperTag;
+};
+
 /**
  *Default before render callback
  */
@@ -31,11 +56,22 @@ Entry.prototype.beforeRender = function(){
 
 
 Entry.prototype.render = function(){
+    var inputHtml, wrapperTag;
+    
     this.beforeRender();
     if (this.form) {
         this.form.emit('beforeRenderInput', this);
     }
-    return HtmlElement.prototype.render.call(this);
+    
+    wrapperTag = this.getWrapper();
+    
+    inputHtml = HtmlElement.prototype.render.call(this);
+    if (wrapperTag) {
+        wrapperTag.html(inputHtml);
+        return wrapperTag.render();
+    }else{
+        return inputHtml;
+    }
 };
 
 /**
