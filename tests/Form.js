@@ -121,5 +121,15 @@ vows.describe('test form')
             'renders textarea': function(form){
                 assert.equal('<div class="control"><textarea name="bio" class="textarea">Awesome</textarea></div>', form.textarea().attr({name: 'bio', class: 'textarea'}).setDefault('Awesome').render());
             }
+        },
+        'create a html tag with second param as the attr': {
+            topic: function() {
+                var html = tag.create('div',{'class': 'form-control'});
+                return html;
+            },
+            'renders html': function(html) {
+                console.log(html.render());
+                assert.equal(html.render(),'<div class="form-control"></div>');
+            }
         }
     }).run();
