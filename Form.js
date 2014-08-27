@@ -10,7 +10,7 @@ function Form(attributes, formData) {
         
     /**
      * Keep inputs in arrays
-     */ 
+     */
     this.elements = [];
     
     this._nameHolder = {};

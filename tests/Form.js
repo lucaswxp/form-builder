@@ -128,7 +128,6 @@ vows.describe('test form')
                 return html;
             },
             'renders html': function(html) {
-                console.log(html.render());
                 assert.equal(html.render(),'<div class="form-control"></div>');
             }
         }
