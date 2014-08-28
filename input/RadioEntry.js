@@ -1,7 +1,7 @@
 var BooleanEntry = require('./BooleanEntry');
 
-function Radio(form) {
-    BooleanEntry.call(this, form);
+function Radio(attributes, form) {
+    BooleanEntry.call(this, attributes, form);
     
     this.attr('type', 'radio');
 }

@@ -1,7 +1,7 @@
 var AbstractEntry = require('../input/AbstractEntry');
 
-function Input(form) {
-    AbstractEntry.call(this, form);
+function Input(attributes, form) {
+    AbstractEntry.call(this, attributes, form);
     this.setTagName('input');
 }
 

@@ -1,7 +1,7 @@
 var InputEntry = require('./InputEntry');
 
-function BooleanEntry(form) {
-    InputEntry.call(this, form);
+function BooleanEntry(attributes, form) {
+    InputEntry.call(this, attributes, form);
 }
 
 BooleanEntry.prototype = Object.create(InputEntry.prototype);

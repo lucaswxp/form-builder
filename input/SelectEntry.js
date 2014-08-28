@@ -1,12 +1,12 @@
 var AbstractEntry = require('../input/AbstractEntry'),
     HtmlElement = require('../html/HtmlElement');
 
-function Select(form) {
+function Select(attributes, form) {
     var options = {},
         optionsHtml = [],
         emptyLabel = null;
     
-    AbstractEntry.call(this, form);
+    AbstractEntry.call(this, attributes, form);
     
     this.optionsHtml = [];
     

@@ -1,7 +1,7 @@
 var HtmlElement = require('../html/HtmlElement');
 
-function Entry(form) {
-    HtmlElement.call(this);
+function Entry(attributes, form) {
+    HtmlElement.call(this, undefined, attributes);
     
     this.form = (form ? form : null);
     this.inputWrapper = null;

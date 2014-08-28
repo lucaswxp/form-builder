@@ -1,7 +1,7 @@
 var BooleanEntry = require('./BooleanEntry');
 
-function Checkbox(form) {
-    BooleanEntry.call(this, form);
+function Checkbox(attributes, form) {
+    BooleanEntry.call(this, attributes, form);
     
     this.attr('type', 'checkbox');
     this.attr('value', '1');

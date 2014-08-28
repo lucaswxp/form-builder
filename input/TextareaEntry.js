@@ -1,7 +1,7 @@
 var AbstractEntry = require('../input/AbstractEntry');
 
-function Textarea(form) {
-    AbstractEntry.call(this, form);
+function Textarea(attributes, form) {
+    AbstractEntry.call(this, attributes, form);
     this.setTagName('textarea');
 }
 

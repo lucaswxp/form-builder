@@ -112,7 +112,7 @@ vows.describe('test form')
         'wrapping form with a default input wrapper': {
             topic: function(){
                 var form = new Form({action: 'signup', class: 'form'});
-                form.setInputWrapper(tag.create('div').attr('class', 'control'));
+                form.setInputWrapper(tag.create('div', {'class': 'control'}))
                 return form;
             },
             'renders text': function(form){
@@ -120,6 +120,20 @@ vows.describe('test form')
             },
             'renders textarea': function(form){
                 assert.equal('<div class="control"><textarea name="bio" class="textarea">Awesome</textarea></div>', form.textarea().attr({name: 'bio', class: 'textarea'}).setDefault('Awesome').render());
+            }
+        },
+        'rendering inputs with alternative param style': {
+            topic: function(){
+                return new Form();
+            },
+            'renders text with name as string': function(form){
+                assert.equal('<input name="test" type="text" />', form.text('test').render());
+            },
+            'renders text with name as object': function(form){
+                assert.equal('<input name="test" type="text" />', form.text({name: 'test'}).render());
+            },
+            'renders text with name as string second attr params': function(form){
+                assert.equal('<input class="someclass" name="test" type="text" />', form.text('test', {class: 'someclass'}).render());
             }
         },
         'create a html tag with second param as the attr': {

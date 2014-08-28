@@ -41,13 +41,13 @@ Form.prototype.constructor = Form;
  *
  *@return {Input}
  **/
-Form.prototype.input = function(inputType){
+Form.prototype.input = function(inputType, attributes){
     var input;
     
     if (Input[inputType] !== undefined) {
-        input = new Input[inputType](this);
+        input = new Input[inputType](attributes, this);
     }else{
-        input = new Input.input(this);
+        input = new Input.input(attributes, this);
         
         if (inputType !== undefined) {
             input.attr('type', inputType);
@@ -181,8 +181,18 @@ Form._dynamiclyCreateType = [
 
 for (var i in Form._dynamiclyCreateType) {
     (function(typeName){
-        Form.prototype[typeName] = function(){
-            return this.input(typeName);
+        Form.prototype[typeName] = function(name, attributes){
+            var attributes = (attributes ? attributes : {});
+            
+            if (name !== undefined) {
+                if (name instanceof Object) { // name is actually attributes
+                    attributes = name;
+                }else{
+                    attributes.name = name;
+                }   
+            }
+            
+            return this.input(typeName, attributes);
         };
     })(Form._dynamiclyCreateType[i]);
 }
