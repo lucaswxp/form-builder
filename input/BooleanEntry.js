@@ -7,7 +7,7 @@ function BooleanEntry(attributes, form) {
 BooleanEntry.prototype = Object.create(InputEntry.prototype);
 
 BooleanEntry.prototype.setData = function(value){
-    if (typeof value == 'boolean') {
+    if (typeof value == 'boolean' || typeof value == 'undefined' || value === null) {
         this.attr('checked', value);
     }else {
         if (typeof value == 'string' || typeof value == 'number') {
